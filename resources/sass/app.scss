@@ -1,0 +1,27 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+.btn-submit {
+    top: 2px;
+    right: 2px;
+}
+
+main {
+    height: 90vh;
+}
+
+.icon {
+    height: 70px;
+    margin-left: 15px;
+}
+
+#match-list {
+    top: 37px;
+}
