@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'NamedaysController@index')->name('home');
+Route::get('/getnamedays', 'NamedaysController@api');
+Route::get('/kdy-ma-svatek', 'NamedaysController@search')->name('search');
+
