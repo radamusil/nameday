@@ -19,6 +19,7 @@ class NamedaysController extends Controller
                             ->where('month', $now->month)
                             ->first();
 
+
         return view('index', compact('nameday', 'now'));
     }
 

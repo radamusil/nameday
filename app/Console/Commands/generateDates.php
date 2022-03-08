@@ -62,10 +62,7 @@ class generateDates extends Command
                 'country'=> 'sk',
             ]);
             
-            if ($response->status() != 200) {
-                sleep(15);
-            }
-            $body = $response->getBody();
+            $body = $response->throw()->getBody();
             $name = json_decode((string) $response)->nameday->sk;    
             $nameday->name = $name;
             $nameday->save();

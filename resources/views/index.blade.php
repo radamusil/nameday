@@ -11,7 +11,11 @@
                     Svátek má:
                 </div>
                 <div class="p-2 m-2 bg-secondary">
-                    {{$nameday->name}}
+                    @if ($nameday == null)
+                        'Někde se stala chyba, dnešní svátek jsme nenašli'
+                    @else
+                        {{$nameday->name}}
+                    @endif
                 </div>
             </div>
         </div>
