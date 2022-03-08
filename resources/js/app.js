@@ -4,30 +4,31 @@ require('./bootstrap');
 
 const name = document.getElementById('name');
 const matchList = document.getElementById('match-list');
-//Search obce.json and filter it
+//get namedays and filter it
 const searchNames = async searchText => {
+    //fetch namedays from api point
     const res = await fetch('/getnamedays');
     const names = await res.json();
-    console.log(names);
+    
     //Get matches to current text input
      let matches = Object.values(names).filter(nameday => {
         const regex = new RegExp(`^${searchText}`, 'gi');
         return nameday.name.match(regex);
     });
-    console.log(matches);
-
+    //clear sugestions if no input
     if(searchText.length === 0) {
         matches = [];
         matchList.innerHTML = '';
     }
 
     outputHtml(matches);
-    //console.log(matches); 
+    
 };
-
+//put selected sugestion to input
 const autoFill = (e) => {
     document.getElementById('city_name').value = e;
 }
+//display matching sugestions
 const outputHtml = matches => {
     if(matches.length > 0) {
         const html = matches.map(match => `
@@ -42,6 +43,6 @@ const outputHtml = matches => {
         matchList.innerHTML = '';
     }
 }
-
+//get changes of input 
 name.addEventListener('input', () => searchNames(name.value));
 

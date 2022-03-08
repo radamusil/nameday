@@ -41,25 +41,27 @@ class generateDates extends Command
      */
     public function handle()
     {
+        //clear namedays table
         Nameday::truncate();
+
+        //Prepare time varibles and period of whole year in which we want to get the data
         $now = Carbon::today();
         $start = $now->copy()->firstOfYear();
         $end = $now->copy()->endOfYear();
         $period = CarbonPeriod::create($start, $end);
-        //dd($period );
-        $dates = $period->toArray();
 
+        //create a row in table namedays for each day of the year
         foreach ($period as $date) {
             $nameday = new Nameday;
             $nameday->day = $date->day;
             $nameday->month = $date->month;
-
+            //get name from the api nameday.abalin.net for specific day
             $response = Http::get('https://nameday.abalin.net/api/V1/getdate', [
                 'day'=> "$nameday->day",
                 'month'=> "$nameday->month",
                 'country'=> 'sk',
             ]);
-            //dd($response);
+            
             if ($response->status() != 200) {
                 sleep(15);
             }
