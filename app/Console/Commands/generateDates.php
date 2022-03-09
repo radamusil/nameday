@@ -61,6 +61,16 @@ class generateDates extends Command
                 'month'=> "$nameday->month",
                 'country'=> 'sk',
             ]);
+
+            //if to many requests, wait a minute and continue
+            if ($response->status() == '429') {
+                sleep(60);
+                $response = Http::get('https://nameday.abalin.net/api/V1/getdate', [
+                    'day'=> "$nameday->day",
+                    'month'=> "$nameday->month",
+                    'country'=> 'sk',
+                ]);
+            }
             
             $body = $response->throw()->getBody();
             $name = json_decode((string) $response)->nameday->sk;    

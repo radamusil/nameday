@@ -11302,4 +11302,6 @@ main {
 
 #match-list {
   top: 37px;
+  max-height: 305px;
+  overflow-y: auto;
 }
